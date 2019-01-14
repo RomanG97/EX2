@@ -48,7 +48,7 @@ public class RegFragment extends BaseFragment implements RegFragmentView {
     @Override
     public void initBtnReg() {
         btnReg = view.findViewById(R.id.btnReg);
-        //btnReg.setEnabled(false);
+        btnReg.setEnabled(false);
         btnReg.setOnClickListener(view -> checkLogPassToOpenMain());
     }
 

@@ -49,7 +49,7 @@ public class LogFragment extends BaseFragment implements LogFragmentView {
     @Override
     public void initBtn() {
         btnLog = view.findViewById(R.id.btnLog);
-        //btnLog.setEnabled(false);
+        btnLog.setEnabled(false);
         btnLog.setOnClickListener(view -> saveInfoToPref());
     }
 
