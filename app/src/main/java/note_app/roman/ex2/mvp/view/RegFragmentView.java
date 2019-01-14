@@ -6,10 +6,12 @@ public interface RegFragmentView extends MvpView {
 
     void initBtnReg();
 
-    void initRegEt();
+    void initRegEtObservable();
 
-    void initPasEt();
+    void initPasEtObservable();
 
     void checkLogPassToOpenMain();
+
+    void saveIfValid();
 
 }

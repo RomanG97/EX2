@@ -5,8 +5,6 @@ import com.arellomobile.mvp.MvpView;
 public interface LogRegView extends MvpView {
     void initBtns();
 
-    void initSupportFragmentManager();
-
     void initRegFragment();
 
     void initLogFragment();
@@ -17,6 +15,6 @@ public interface LogRegView extends MvpView {
 
     void saveAllInfoToPref(String login, String password);
 
-    void checkInfoValidAndOpenMain(String login, String password);
+    void saveLastUser(String login, String password);
 
 }

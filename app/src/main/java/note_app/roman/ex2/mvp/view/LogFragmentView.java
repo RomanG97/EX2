@@ -6,9 +6,11 @@ public interface LogFragmentView extends MvpView {
 
     void initBtn();
 
-    void initLogEt();
+    void initLogEtObservable();
 
-    void initPasEt();
+    void initPasEtObservable();
+
+    void saveIfValid();
 
     void saveInfoToPref();
 

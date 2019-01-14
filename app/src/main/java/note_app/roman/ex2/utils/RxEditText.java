@@ -27,7 +27,6 @@ public class RxEditText {
 
             }
         });
-
         return subject;
     }
 }

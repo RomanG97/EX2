@@ -3,12 +3,12 @@ package note_app.roman.ex2.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
-
-import java.util.Objects;
 
 import note_app.roman.ex2.BaseActivity;
 import note_app.roman.ex2.R;
@@ -20,9 +20,9 @@ import note_app.roman.ex2.utils.Preference;
 
 public class LogRegActivity extends BaseActivity implements LogRegView {
 
-    private LogFragment logFragment;
-    private RegFragment regFragment;
     private FragmentManager fragmentManager;
+    private LinearLayout llFragmentSlotReg;
+    private LinearLayout llFragmentSlotLog;
 
     @InjectPresenter
     LogRegPresenter logRegPresenter;
@@ -36,6 +36,9 @@ public class LogRegActivity extends BaseActivity implements LogRegView {
 
         logRegPresenter.initUi();
 
+        llFragmentSlotLog = findViewById(R.id.llFragmentSlotLog);
+        llFragmentSlotReg = findViewById(R.id.llFragmentSlotReg);
+
     }
 
     @Override
@@ -47,51 +50,49 @@ public class LogRegActivity extends BaseActivity implements LogRegView {
     }
 
     @Override
-    public void initSupportFragmentManager() {
-
-    }
-
-    @Override
     public void initRegFragment() {
-        regFragment = new RegFragment();
+        RegFragment regFragment = new RegFragment();
+
+        fragmentManager
+                .beginTransaction()
+                .add(R.id.llFragmentSlotReg, regFragment)
+                .commit();
+
+        llFragmentSlotReg.setVisibility(View.GONE);
     }
 
     @Override
     public void initLogFragment() {
-        logFragment = new LogFragment();
+        LogFragment logFragment = new LogFragment();
+
+        fragmentManager
+                .beginTransaction()
+                .add(R.id.llFragmentSlotLog, logFragment)
+                .commit();
+
+        llFragmentSlotReg.setVisibility(View.GONE);
     }
 
     @Override
     public void showRegFragment() {
-        fragmentManager
-                .beginTransaction()
-                .remove(logFragment)
-                .replace(R.id.llFragmentSlot, regFragment)
-                .commit();
+        llFragmentSlotLog.setVisibility(View.GONE);
+        llFragmentSlotReg.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showLogFragment() {
-        fragmentManager
-                .beginTransaction()
-                .remove(regFragment)
-                .replace(R.id.llFragmentSlot, logFragment)
-                .commit();
+        llFragmentSlotReg.setVisibility(View.GONE);
+        llFragmentSlotLog.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void saveAllInfoToPref(String login, String password) {
-        if(!Preference.getLastUser(this).equals(login)){
-            Toast.makeText(this,"Wrong login", Toast.LENGTH_SHORT).show();
+        if (!Preference.getLastUser(this).equals(login)) {
+            Toast.makeText(this, "Wrong login", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!Preference.getLastPassword(this).equals(password)){
-            Toast.makeText(this,"Wrong password", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if(Preference.getLastUser(this).isEmpty() &&
-                Preference.getLastPassword(this).isEmpty()){
-            Toast.makeText(this,"Empty login or password", Toast.LENGTH_SHORT).show();
+        if (!Preference.getLastPassword(this).equals(password)) {
+            Toast.makeText(this, "Wrong password", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -101,11 +102,11 @@ public class LogRegActivity extends BaseActivity implements LogRegView {
     }
 
     @Override
-    public void checkInfoValidAndOpenMain(String login, String password) {
+    public void saveLastUser(String login, String password) {
         Preference.setLastUser(this, login);
         Preference.setLastPassword(this, password);
 
-        Toast.makeText(this,"Data saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show();
 
     }
 

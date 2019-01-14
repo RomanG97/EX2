@@ -30,7 +30,15 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llFragmentSlot"
+        android:id="@+id/llFragmentSlotLog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llFragmentSlotReg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
